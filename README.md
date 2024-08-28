@@ -24,7 +24,7 @@ UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterD
 
 **Step 3**: LocalNotificationService
 
-Create a local_notification_service class.<br />
+Create a notification_service class.<br />
 3.1 Add the following import
 ```
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
