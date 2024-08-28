@@ -4,6 +4,7 @@ Flutter Local Notifications is a package that allows Flutter developers to displ
 ## Setup
 
 **Step 1**: Add the dependency <br />
+
 Run the following command in your terminal.<br />
 ```
 flutter pub add flutter_local_notifications
@@ -22,6 +23,7 @@ UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterD
 ```
 
 **Step 3**: LocalNotificationService
+
 Create a local_notification_service class.<br />
 3.1 Add the following import
 ```
@@ -35,7 +37,7 @@ final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 3.3 Create a method called setup to initialize the plugin for each platform.
 
 **Step 4**: Call the setup method
-In the main.dart, make a call to setup method that we just defined in the service after ‘ WidgetsFlutterBinding.ensureInitialized(); ’ but before ‘runApp(const MyApp());’
+In the main.dart, make a call to setup method that we just defined in the service after `WidgetsFlutterBinding.ensureInitialized()` but before `runApp(const MyApp())`.
 ```
 void main() async {
 WidgetsFlutterBinding.ensureInitialized();
@@ -67,10 +69,10 @@ body: 'This is a local notification.',
 
 We will see each property.
 
-`id` – the identifier of the notification. Each notification must have a unique identifier.
-`title` – the title of the notification.
-`body` – what we want to display as the main message of our notification.
-`notificationDetails` – the notification details object we discussed above.
+`id` – the identifier of the notification. Each notification must have a unique identifier.<br />
+`title` – the title of the notification.<br />
+`body` – what we want to display as the main message of our notification.<br />
+`notificationDetails` – the notification details object we discussed above.<br />
 `payload` – the data that we want to pass with this notification so that it can be used later when the notification is tapped on and our application opens up again.
 
 
