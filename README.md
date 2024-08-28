@@ -3,10 +3,12 @@ Flutter Local Notifications is a package that allows Flutter developers to displ
 
 ## Setup
 
-**Step 1**: Add the dependency
-Run the following command in your terminal
-`flutter pub add flutter_local_notifications`
-Alternatively, you can add this to your pubspec.yaml file under dependencies. Make sure you get the latest from pub.dev.
+**Step 1**: Add the dependency <br />
+Run the following command in your terminal.<br />
+```
+flutter pub add flutter_local_notifications
+```
+Alternatively, you can add this to your pubspec.yaml file under dependencies. Make sure you get the latest from pub.dev.<br />
 flutter_local_notifications: ^latest-version
 
 **Step 2**: iOS — Modify App Delegate
@@ -22,42 +24,46 @@ UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterD
 **Step 3**: LocalNotificationService
 Create a local_notification_service class.
 3.1 Add the following import
-    
-`import 'package:flutter_local_notifications/flutter_local_notifications.dart';`
+```
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+```
 
 3.2 Define a private `FlutterNotificationPluginVariable`
-
-`final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-`
+```
+final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+```
 3.3 Create a method called setup to initialize the plugin for each platform.
 
 **Step 4**: Call the setup method
 In the main.dart, make a call to setup method that we just defined in the service after ‘ WidgetsFlutterBinding.ensureInitialized(); ’ but before ‘runApp(const MyApp());’
-
-`void main() async {
+```
+void main() async {
 WidgetsFlutterBinding.ensureInitialized();
 // Initialize the NotificationService
 await NotificationService().init();
 runApp(const MyApp());
-}`
+}
+```
 
 **Step 5**: Write a simple method to show local notification.
-
-`Future<void> showNotification({
+```
+Future<void> showNotification({
 required int id,
 required String title,
 required String body,
 }) async {
 await flutterLocalNotificationsPlugin.show(id, title, body, platformChannelSpecifics);
-}`
+}
+```
 
 **Step 6**: Call the show local notification method.
-
-`NotificationService().showNotification(
+```
+NotificationService().showNotification(
 id: 1,
 title: 'Hello!',
 body: 'This is a local notification.',
-);`
+);
+```
 
 We will see each property.
 
