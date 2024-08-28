@@ -22,7 +22,7 @@ UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterD
 ```
 
 **Step 3**: LocalNotificationService
-Create a local_notification_service class.
+Create a local_notification_service class.<br />
 3.1 Add the following import
 ```
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -67,10 +67,10 @@ body: 'This is a local notification.',
 
 We will see each property.
 
-`id` – the identifier of the notification. Each notification must have a unique identifier
-`title` – the title of the notification
-`body` – what we want to display as the main message of our notification
-`notificationDetails` – the notification details object we discussed above
+`id` – the identifier of the notification. Each notification must have a unique identifier.
+`title` – the title of the notification.
+`body` – what we want to display as the main message of our notification.
+`notificationDetails` – the notification details object we discussed above.
 `payload` – the data that we want to pass with this notification so that it can be used later when the notification is tapped on and our application opens up again.
 
 
