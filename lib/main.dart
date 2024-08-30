@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'notification_service.dart';
 
@@ -27,18 +28,56 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              NotificationService().showNotification(
-                id: 1,
-                title: 'Hello!',
-                body: 'This is a local notification.',
-              );
-            },
-            child: const Text('Show Notification'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              notificationButton(
+                "Show Notification",
+                () => NotificationService().showNotification(
+                  id: 1,
+                  title: 'Hello!',
+                  body: 'This is a local notification.',
+                ),
+              ),
+              notificationButton(
+                "Schedule Notification",
+                () => NotificationService().scheduleNotification(
+                  id: 2,
+                  title: 'Scheduled Notification',
+                  body:
+                      'This notification is scheduled to appear after 5 seconds.',
+                  scheduledNotificationDateTime:
+                      DateTime.now().add(const Duration(seconds: 5)),
+                ),
+              ),
+              notificationButton(
+                "Schedule Periodic Notification",
+                () => NotificationService().schedulePeriodicNotification(
+                  id: 3,
+                  title: 'Periodic Notification',
+                  body: 'This notification will repeat every minute.',
+                  repeatInterval: RepeatInterval.everyMinute,
+                ),
+              ),
+              notificationButton(
+                "Cancel All Notifications",
+                () => NotificationService().cancelNotification(0),
+              ),
+              notificationButton(
+                "Cancel All Notifications",
+                () => NotificationService().cancelAllNotifications(),
+              ),
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget notificationButton(String title, Function? function) {
+    return ElevatedButton(
+      onPressed: () => function!(),
+      child: Text(title),
     );
   }
 }

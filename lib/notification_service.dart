@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -14,6 +16,8 @@ class NotificationService {
   NotificationService._internal();
 
   Future<void> init() async {
+    // Initialize time zone data
+    tz.initializeTimeZones();
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
@@ -58,10 +62,10 @@ class NotificationService {
   }
 
   //By design, iOS applications do not display notifications while the app is in the foreground unless configured to do so.
-  //For older versions of iOS, you need to handle the callback as part of specifying the method that should 
-  //be fired to the onDidReceiveLocalNotification argument when creating an instance DarwinInitializationSettings object 
+  //For older versions of iOS, you need to handle the callback as part of specifying the method that should
+  //be fired to the onDidReceiveLocalNotification argument when creating an instance DarwinInitializationSettings object
   //that is passed to the function for initializing the plugin.
-  
+
   // Handle iOS-specific notification interactions
   void onDidReceiveLocalNotification(
       int id, String? title, String? body, String? payload) {
@@ -107,5 +111,51 @@ class NotificationService {
       body,
       platformChannelSpecifics,
     );
+  }
+
+  Future<void> scheduleNotification({
+    int id = 0,
+    String? title,
+    String? body,
+    String? payload,
+    required DateTime scheduledNotificationDateTime,
+  }) async {
+    tz.TZDateTime tzScheduledDateTime =
+        tz.TZDateTime.from(scheduledNotificationDateTime, tz.local);
+    return flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tzScheduledDateTime,
+      platformChannelSpecifics,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      payload: payload,
+    );
+  }
+
+  Future<void> schedulePeriodicNotification({
+    int id = 0,
+    String? title,
+    String? body,
+    String? payload,
+    required RepeatInterval repeatInterval,
+  }) async {
+    return flutterLocalNotificationsPlugin.periodicallyShow(
+      id,
+      title,
+      body,
+      repeatInterval,
+      platformChannelSpecifics,
+      payload: payload,
+    );
+  }
+
+  Future<void> cancelNotification(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  Future<void> cancelAllNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
   }
 }
