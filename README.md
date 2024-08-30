@@ -77,11 +77,11 @@ We will see each property.
 
 Different notification types in your NotificationService class:
 
-`show` – Displays a simple notification immediately. It shows a title, body, and can include a payload for additional data. This type of notification is typically used for alerts, reminders, or updates that need immediate user attention.
-`zonedSchedule` – This type of notification is scheduled to be displayed at a specific time within a defined time zone. The zonedSchedule method allows you to account for time zone differences, ensuring that the notification triggers at the correct local time, regardless of where the user is located.
+`show` – Displays a simple notification immediately. It shows a title, body, and can include a payload for additional data. This type of notification is typically used for alerts, reminders, or updates that need immediate user attention.<br />
+`zonedSchedule` – This type of notification is scheduled to be displayed at a specific time within a defined time zone. The zonedSchedule method allows you to account for time zone differences, ensuring that the notification triggers at the correct local time, regardless of where the user is located.<br />
 `periodicallyShow` – Sets up a notification to be shown repeatedly at a specified interval (e.g., hourly, daily, weekly). This notification can help with recurring reminders.
 
 Cancel Notification:
 
-`cancel(id)` – Cancels a previously scheduled or shown notification by its ID. This method ensures that a notification doesn't appear if it's no longer relevant.
+`cancel(id)` – Cancels a previously scheduled or shown notification by its ID. This method ensures that a notification doesn't appear if it's no longer relevant.<br />
 `cancelAll()` – Cancels all notifications that have been scheduled or displayed. This method is useful when a reset is needed, such as clearing all reminders after a user session ends.
