@@ -75,7 +75,7 @@ We will see each property.
 `notificationDetails` – the notification details object we discussed above.<br />
 `payload` – the data that we want to pass with this notification so that it can be used later when the notification is tapped on and our application opens up again.
 
-Different notification types in your NotificationService class:
+Methods provided by the `FlutterLocalNotificationsPlugin`:
 
 `show` – Displays a simple notification immediately. It shows a title, body, and can include a payload for additional data. This type of notification is typically used for alerts, reminders, or updates that need immediate user attention.<br />
 `zonedSchedule` – This type of notification is scheduled to be displayed at a specific time within a defined time zone. The zonedSchedule method allows you to account for time zone differences, ensuring that the notification triggers at the correct local time, regardless of where the user is located.<br />
